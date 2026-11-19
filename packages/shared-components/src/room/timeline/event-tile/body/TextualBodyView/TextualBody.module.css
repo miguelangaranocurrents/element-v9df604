@@ -41,6 +41,11 @@
     display: flex;
 }
 
+.annotated > :first-child {
+    /* Let the body shrink to the tile width so wide content (e.g. code blocks) scrolls instead of stretching it */
+    min-width: 0;
+}
+
 .annotatedInline {
     display: inline-flex;
 }

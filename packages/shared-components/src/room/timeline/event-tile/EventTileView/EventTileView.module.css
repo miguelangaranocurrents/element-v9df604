@@ -120,7 +120,8 @@
 
 /* The shell controls the body-slot surface. Body components own their
    internal content styling. */
-.slotBody > * {
+.root:not(.stateEditing) .slotBody > * {
+    /* Not applied while editing: it would clip the edit composer's autocomplete popup. */
     overflow-y: hidden;
     text-align: start;
 }

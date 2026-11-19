@@ -19,6 +19,7 @@ import {
     type MRoomTopicEventContent,
     type User,
 } from "matrix-js-sdk/src/matrix";
+import escapeHtml from "escape-html";
 import { logger } from "matrix-js-sdk/src/logger";
 import { KnownMembership, type RoomMemberEventContent } from "matrix-js-sdk/src/types";
 import { LinkedText } from "@element-hq/web-shared-components";
@@ -73,7 +74,8 @@ export const Commands = [
         args: "<message>",
         description: _td("slash_command|spoiler"),
         runFn: function (cli, roomId, threadId, message = "") {
-            return successSync(ContentHelpers.makeHtmlMessage(message, `<span data-mx-spoiler>${message}</span>`));
+            const html = htmlSerializeFromMdIfNeeded(message, { forceHTML: false }) ?? escapeHtml(message);
+            return successSync(ContentHelpers.makeHtmlMessage(message, `<span data-mx-spoiler>${html}</span>`));
         },
         category: CommandCategories.messages,
     }),
